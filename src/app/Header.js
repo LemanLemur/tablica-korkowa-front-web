@@ -9,7 +9,8 @@ import LogInDialog from "../components/LogInDialog";
 import { useSelector, useDispatch } from "react-redux";
 import { CLOSE_LOG_IN_MSG } from "../constants/actionTypes";
 import UserMenu from "../components/UserMenu";
-import firebase from "../firebase";
+import { Link } from "react-router-dom";
+import "./index.css";
 
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -23,12 +24,26 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2)
   },
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    fontSize: "32px",
+    fontFamily: "'Fredericka the Great', cursive",
+    cursor: "pointer",
+    textDecoration: "none",
+    color: "white",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "22px"
+    }
+  },
+  text: {
+    flexGrow: 1,
+    [theme.breakpoints.down("xs")]: {
+      display: "none"
+    }
   },
   userDiv: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "center"
   }
 }));
 
@@ -52,7 +67,6 @@ export default function ButtonAppBar() {
     } else {
       setOpenSnack(false);
     }
-    // console.log(firebase.auth.currentUser().email);
   }, [auth]);
 
   function Alert(props) {
@@ -75,12 +89,12 @@ export default function ButtonAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          <Link to="/" className={classes.title}>
             Tablica Korkowa
-          </Typography>
+          </Link>
           {isLogged ? (
             <div className={classes.userDiv}>
-              <Typography variant="h7" className={classes.title}>
+              <Typography variant="h7" className={classes.text}>
                 Witaj {user.firstName}!
               </Typography>
               <UserMenu />

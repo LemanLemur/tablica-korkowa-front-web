@@ -37,6 +37,7 @@ export default function LogOutButton() {
       dispatch({ type: LOG_OUT });
       localStorage.removeItem('uid');
       localStorage.removeItem("user_n");
+      window.location.reload();
     });
   }
   

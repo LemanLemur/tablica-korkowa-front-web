@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+
+.font-div-titile{
+  font-family: 'Fredericka the Great', cursive;
+  font-size: 48px;
+  padding: 12px;
+}
+
+.font-div-subtitile{
+  font-family: 'Fredericka the Great', cursive;
+  font-size: 28px;
+  padding: 12px;
+}
+
+.div-flex{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}

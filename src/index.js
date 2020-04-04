@@ -9,6 +9,8 @@ import "./index.css";
 
 import App from "./app/App";
 import Header from "./app/Header";
+import Profile from "./app/Profile";
+import PageNotFound from "./app/PageNotFound";
 
 const store = configureStore();
 
@@ -19,7 +21,8 @@ ReactDOM.render(
         <Header/>
         <Switch>
           <Route exact path="/" component={App} />
-          <Route render={() => <div>404 page not found.</div>} />
+          <Route exact path="/profile" component={Profile} />
+          <Route render={() => <PageNotFound/>} />
         </Switch>
       </ConnectedRouter>
     </Provider>
