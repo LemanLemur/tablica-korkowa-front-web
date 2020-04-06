@@ -96,6 +96,7 @@ export default function ButtonAppBar() {
             <div className={classes.userDiv}>
               <Typography variant="h7" className={classes.text}>
                 Witaj {user.firstName}!
+                
               </Typography>
               <UserMenu />
             </div>

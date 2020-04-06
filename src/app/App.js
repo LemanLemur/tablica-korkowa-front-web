@@ -40,7 +40,7 @@ function App() {
   }, [dataMobile]);
 
   async function fetchData() {
-    await axios.get("http://localhost:3001/cards/").then((res) => {
+    await axios.get("http://localhost:3001/cards/NewestCards/3").then((res) => {
       setDataMobile(res.data);
     });
   }
@@ -73,11 +73,14 @@ function App() {
     <div className={classes.root}>
       {dataMobile.map((card) => (
         <HomeCard
-          subject="Matma"
+        type={card.type}
+          level={card.level}
+          avatar={card.avatar}
+          subject={card.subject}
           price={card.price}
           city={card.city}
           endTime={card.endDate}
-        />
+          />
       ))}
     </div>
   ) : (
@@ -86,17 +89,23 @@ function App() {
         <div className={classes.col}>
           {dataDesktop1.map((card) => (
             <HomeCard
-              subject="Matma"
+            type={card.type}
+            level={card.level}
+            avatar={card.avatar}
+              subject={card.subject}
               price={card.price}
               city={card.city}
               endTime={card.endDate}
-            />
+              />
           ))}
         </div>
         <div className={classes.col}>
           {dataDesktop2.map((card) => (
             <HomeCard
-              subject="Polok"
+            type={card.type}
+            level={card.level}
+            avatar={card.avatar}
+              subject={card.subject}
               price={card.price}
               city={card.city}
               endTime={card.endDate}
