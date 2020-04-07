@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "15px"
   },
   paper: {
-    padding: "12px",
-    margin: "12px",
+    padding: "8px",
+    margin: "10px",
     width: "100%",
     display: "flex",
     flexDirection: "column",
@@ -99,6 +99,9 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     right: 0,
     top: -15
+  },
+  level: {
+    color: "grey"
   }
 
 }));
@@ -131,7 +134,7 @@ export default function HomeCard(props) {
           <div className={classes.col}>
             <div className={classes.row}>
               <div className={classes.name}>
-                <b>{props.subject}</b> <i>{props.level}</i>
+                <b>{props.tittle}</b> <i className={classes.level}>{props.level}</i>
               </div>
               <div className={classes.price}>
                 <b className={classes.priceFloatRight}>{props.price} zł</b>

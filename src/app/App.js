@@ -76,7 +76,7 @@ function App() {
         type={card.type}
           level={card.level}
           avatar={card.avatar}
-          subject={card.subject}
+          tittle={card.tittle}
           price={card.price}
           city={card.city}
           endTime={card.endDate}
@@ -91,8 +91,8 @@ function App() {
             <HomeCard
             type={card.type}
             level={card.level}
-            avatar={card.avatar}
-              subject={card.subject}
+            avatar={card.avatar} 
+            tittle={card.tittle}
               price={card.price}
               city={card.city}
               endTime={card.endDate}
@@ -105,7 +105,7 @@ function App() {
             type={card.type}
             level={card.level}
             avatar={card.avatar}
-              subject={card.subject}
+            tittle={card.tittle}
               price={card.price}
               city={card.city}
               endTime={card.endDate}
