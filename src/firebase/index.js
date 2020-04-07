@@ -27,11 +27,9 @@ const firebaseConfig = {
           return this.auth.signOut();
       }
 
-      async register(name, email, password){
+      async register(email, password){
           await this.auth.createUserWithEmailAndPassword(email, password)
-          return this.auth.currentUser.updateProfile({
-              displayName: name
-          });
+          return this.auth.currentUser;
       }
   }
 

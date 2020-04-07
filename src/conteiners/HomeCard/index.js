@@ -104,11 +104,11 @@ export default function HomeCard(props) {
   }
 
   const classes = useStyles();
+  
   return (
     <div className={classes.root}>
       <div className={classes.paper}>
         <div className={classes.row}>
-          <i class="fas fa-users"></i>
           <Avatar alt="avatar" src={props.avatar} className={classes.avatar} />
 
           <div className={classes.col}>

@@ -7,13 +7,14 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
+import { Link } from "react-router-dom";
 import firebase from "../../firebase";
 import {
   LOG_IN,
   LOAD_USER,
   LOG_IN_ERROR,
   CLOSE_LOG_IN_MSG,
-  LOG_IN_SUCCESS
+  LOG_IN_SUCCESS,
 } from "../../constants/actionTypes";
 import axios from "axios";
 import { LAST_LOG_UPDATE_URL, GET_USER_BY_AID_URL } from "../../constants/API";
@@ -24,28 +25,43 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { returnErrorMsg } from "../../functions/returnErrorMessage";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   form: {
     display: "flex",
     flexDirection: "column",
     margin: "auto",
-    width: "fit-content"
+    width: "fit-content",
   },
   formControl: {
     marginTop: theme.spacing(2),
-    minWidth: 120
+    minWidth: 120,
   },
   formControlLabel: {
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   textFieldArea: {
     margin: "12px",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
   },
   divClick: {
-    cursor: "pointer"
+    cursor: "pointer",
+  },
+  link: {
+    fontSize: "13px",
+    textAlign: "justify",
+    marginRight: "5px",
+    marginBottom: "5px",
+  },
+  col: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  button: {
+    borderColor: "white",
+    color: "white",
   }
 }));
 
@@ -56,8 +72,22 @@ export default function LogInDialog() {
   const [loading, setLoading] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [isMobile, setIsMobile] = React.useState(false);
   const dispatch = useDispatch();
-  const auth = useSelector(state => state.auth);
+  const auth = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    handleResize();
+  }, []);
+
+  function handleResize() {
+    if (window.innerWidth <= 500) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }
 
   useEffect(() => {
     if (auth.authUser != null) {
@@ -72,13 +102,13 @@ export default function LogInDialog() {
     } else {
       setOpenSnack(false);
     }
-  }, [auth]);
+  }, [auth.error, auth.showMessage, auth.authUser]);
 
-  const handleChangeEmail = e => {
+  const handleChangeEmail = (e) => {
     setEmail(e.target.value);
   };
 
-  const handleChangePassword = e => {
+  const handleChangePassword = (e) => {
     setPassword(e.target.value);
   };
 
@@ -90,7 +120,7 @@ export default function LogInDialog() {
     setOpen(false);
   };
 
-  const handleKeyDown = e => {
+  const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleLogIn();
     }
@@ -99,10 +129,10 @@ export default function LogInDialog() {
   async function handleLogIn() {
     setLoading(true);
     try {
-      await firebase.login(email, password).then(res => {
+      await firebase.login(email, password).then((res) => {
         dispatch({ type: LOG_IN, payload: res.user });
         localStorage.setItem("uid", res.user.uid);
-        axios.get(GET_USER_BY_AID_URL + res.user.uid).then(res => {
+        axios.get(GET_USER_BY_AID_URL + res.user.uid).then((res) => {
           // console.log(res.data);
           localStorage.setItem("user_n", res.data[0].firstName);
           localStorage.setItem("user_a", res.data[0].avatar);
@@ -127,7 +157,7 @@ export default function LogInDialog() {
 
   return (
     <React.Fragment>
-      <Button color="inherit" onClick={handleClickOpen}>
+      <Button variant="outlined" className={classes.button} onClick={handleClickOpen}>
         Zaloguj
       </Button>
       <Dialog
@@ -140,8 +170,12 @@ export default function LogInDialog() {
         <DialogTitle id="max-width-dialog-title">Logowanie</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Witaj w Tablica Korkowa, zaloguj się aby uzyskać więcej możliwości!
+            <dir style={{ textAlign: "justify", marginLeft: "0px" }}>
+              Witaj w Tablica Korkowa, zaloguj się aby uzyskać więcej
+              możliwości!
+            </dir>
           </DialogContentText>
+
           {loading ? (
             <center>
               <CircularProgress />
@@ -160,19 +194,64 @@ export default function LogInDialog() {
                 label="Hasło"
                 value={password}
                 type="password"
-                onKeyDown={e => handleKeyDown(e)}
+                onKeyDown={(e) => handleKeyDown(e)}
               />
             </div>
           )}
         </DialogContent>
-        <DialogActions>
-          <Button variant="outlined" onClick={handleClose} color="secondary">
-            Anuluj
-          </Button>
-          <Button variant="contained" onClick={handleLogIn} color="primary">
-            Zaloguj
-          </Button>
-        </DialogActions>
+        {isMobile ? (
+          <DialogActions className={classes.col}>
+            <div className={classes.link} style={{marginRight: "0px"}}>
+              Nie masz jeszcze konta? Kliknij 
+              <Link
+                onClick={handleClose}
+                to="/sign-up"
+                style={{ textDecoration: "none", color: "#1976d2" }}
+              >
+                tutaj
+              </Link>
+              .
+            </div>
+            <center style={{marginLeft: "0px"}}>
+              <Button
+                variant="outlined"
+                onClick={handleClose}
+                color="secondary"
+                style={{ margin: "5px" }}
+              >
+                Anuluj
+              </Button>
+              <Button
+                variant="contained"
+                onClick={handleLogIn}
+                color="primary"
+                style={{ margin: "5px" }}
+              >
+                Zaloguj
+              </Button>
+            </center>
+          </DialogActions>
+        ) : (
+          <DialogActions>
+            <div className={classes.link}>
+              Nie masz jeszcze konta? Kliknij 
+              <Link
+                onClick={handleClose}
+                to="/sign-up"
+                style={{ textDecoration: "none", color: "#1976d2" }}
+              >
+                tutaj
+              </Link>
+              .
+            </div>
+            <Button variant="outlined" onClick={handleClose} color="secondary">
+              Anuluj
+            </Button>
+            <Button variant="contained" onClick={handleLogIn} color="primary">
+              Zaloguj
+            </Button>
+          </DialogActions>
+        )}
         <Snackbar
           open={openSnack}
           autoHideDuration={6000}
