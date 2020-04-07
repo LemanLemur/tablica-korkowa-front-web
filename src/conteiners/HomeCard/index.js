@@ -1,14 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import RoomIcon from "@material-ui/icons/Room";
-import PersonIcon from '@material-ui/icons/Person';
-import GroupIcon from '@material-ui/icons/Group';
-import { useEffect } from "react";
+import PersonIcon from "@material-ui/icons/Person";
+import GroupIcon from "@material-ui/icons/Group";
+import timeConverter from "../../functions/timeConverter";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,12 +15,12 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "20px",
     marginRight: "20px",
     width: "400px",
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down("xs")]: {
       width: "290px",
     },
     cursor: "pointer",
     height: "135px",
-    marginBottom: "15px"
+    marginBottom: "15px",
   },
   paper: {
     padding: "8px",
@@ -44,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "initial",
     justifyContent: "space-between",
     width: "100%",
-    position: "relative"
+    position: "relative",
   },
   locRow: {
     display: "flex",
@@ -65,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "5px",
     width: theme.spacing(12),
     height: theme.spacing(12),
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down("xs")]: {
       width: theme.spacing(6),
       height: theme.spacing(6),
     },
@@ -90,10 +86,10 @@ const useStyles = makeStyles((theme) => ({
     color: "#20bf6b",
     fontSize: "16px",
     margin: "5px",
-    width: "85px"
+    width: "85px",
   },
   priceFloatRight: {
-    float:"right"
+    float: "right",
   },
   type: {
     position: "absolute",
@@ -106,45 +102,39 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-function timeConverter(UNIX_timestamp){
-  var a = new Date(UNIX_timestamp * 1000);
-  var months = ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpnień','Wrzesień','Październik','Listopad','Grudzień'];
-  var year = a.getFullYear();
-  var month = months[a.getMonth()];
-  var date = a.getDate();
-  var hour = a.getHours();
-  var min = a.getMinutes();
-  //var sec = a.getSeconds();
-  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min;// + ':' + sec ;
-  return time;
-}
-
 export default function HomeCard(props) {
+  function Capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <div className={classes.paper}>
-        <div className={classes.row}><i class="fas fa-users"></i>
-          <Avatar
-            alt="avatar"
-            src={props.avatar}
-            className={classes.avatar}
-          />
-          
+        <div className={classes.row}>
+          <i class="fas fa-users"></i>
+          <Avatar alt="avatar" src={props.avatar} className={classes.avatar} />
+
           <div className={classes.col}>
             <div className={classes.row}>
               <div className={classes.name}>
-                <b>{props.tittle}</b> <i className={classes.level}>{props.level}</i>
+                <b>{Capitalize(props.tittle)}</b>{" "}
+                <i style={{ color: "darkgrey" }}>{props.level}</i>
               </div>
               <div className={classes.price}>
                 <b className={classes.priceFloatRight}>{props.price} zł</b>
               </div>
-              {
-              props.type === 0 ?
-              <PersonIcon color="action" className={`${classes.icon} ${classes.type}`} />
-              :
-              <GroupIcon color="action" className={`${classes.icon} ${classes.type}`} />
-        }
+              {props.type === 0 ? (
+                <PersonIcon
+                  color="action"
+                  className={`${classes.icon} ${classes.type}`}
+                />
+              ) : (
+                <GroupIcon
+                  color="action"
+                  className={`${classes.icon} ${classes.type}`}
+                />
+              )}
             </div>
             <div className={classes.row}>
               <div className={classes.locRow}>
@@ -152,7 +142,9 @@ export default function HomeCard(props) {
                 {props.city}
               </div>
               <div className={classes.endDate}>
-                <i className={classes.priceFloatRight}>{timeConverter(props.endTime)} </i>
+                <i className={classes.priceFloatRight}>
+                  {timeConverter(props.endTime, true, true, true, true, true)}{" "}
+                </i>
               </div>
             </div>
           </div>

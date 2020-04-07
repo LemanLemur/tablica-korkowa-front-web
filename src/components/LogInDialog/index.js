@@ -7,23 +7,22 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
-import firebase from "../firebase";
+import firebase from "../../firebase";
 import {
   LOG_IN,
   LOAD_USER,
   LOG_IN_ERROR,
   CLOSE_LOG_IN_MSG,
   LOG_IN_SUCCESS
-} from "../constants/actionTypes";
-import SignUp from "./SignIn";
+} from "../../constants/actionTypes";
 import axios from "axios";
-import { LAST_LOG_UPDATE_URL, GET_USER_BY_AID_URL } from "../constants/API";
+import { LAST_LOG_UPDATE_URL, GET_USER_BY_AID_URL } from "../../constants/API";
 import { useSelector, useDispatch } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import { returnErrorMsg } from "../conteiners/returnErrorMessage";
+import { returnErrorMsg } from "../../functions/returnErrorMessage";
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -167,7 +166,6 @@ export default function LogInDialog() {
           )}
         </DialogContent>
         <DialogActions>
-          <SignUp />
           <Button variant="outlined" onClick={handleClose} color="secondary">
             Anuluj
           </Button>

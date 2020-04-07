@@ -14,7 +14,7 @@ import "./index.css";
 
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import { returnErrorMsg } from "../conteiners/returnErrorMessage";
+import { returnErrorMsg } from "../functions/returnErrorMessage";
 
 const useStyles = makeStyles(theme => ({
   root: {

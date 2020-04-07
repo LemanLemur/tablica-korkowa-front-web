@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import HomeCard from "../conteiners/HomeCrard";
+import HomeCard from "../conteiners/HomeCard";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -8,7 +8,8 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    margin: "10px",
+    marginTop: "40px",
+    marginBottom: "20px",
   },
   row: {
     display: "flex",

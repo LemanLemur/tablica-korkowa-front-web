@@ -3,7 +3,7 @@ import axios from "axios";
 import { GET_USER_BY_AID_URL } from "../constants/API";
 import { useSelector, useDispatch } from "react-redux";
 import { LOAD_USER, START_LOAD_DATA } from "../constants/actionTypes";
-import ProfileSkeleton from "../conteiners/ProfileSkeleton";
+import ProfileSkeleton from "../conteiners/ProfileSkeleton/ProfileSkeleton";
 import "./index.css";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -30,7 +30,6 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center",
     border: "0px solid grey",
     borderTop: "4px solid #3f51b5",
-    borderRadius: "4px",
     boxShadow: "-1px 3px 10px 1px rgba(0,0,0,0.25)"
   },
   divRow: {
