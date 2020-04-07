@@ -1,7 +1,7 @@
 import React from "react";
-import firebase from "../firebase";
+import firebase from "../../firebase";
 import { useDispatch } from "react-redux";
-import { LOG_OUT } from "../constants/actionTypes";
+import { LOG_OUT } from "../../constants/actionTypes";
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import IconButton from '@material-ui/core/IconButton';
