@@ -14,9 +14,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     marginLeft: "20px",
     marginRight: "20px",
-    width: "400px",
-    [theme.breakpoints.down("xs")]: {
-      width: "290px",
+    width: "450px",
+    [theme.breakpoints.down("600")]: {
+      width: "350px",
+      marginBottom: "0px",
     },
     cursor: "pointer",
     height: "135px",
@@ -61,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "5px",
     width: theme.spacing(12),
     height: theme.spacing(12),
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("600")]: {
       width: theme.spacing(6),
       height: theme.spacing(6),
     },
@@ -80,6 +81,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "12px",
     color: "#eb3b5a",
     alignSelf: "flex-end",
+    [theme.breakpoints.down("600")]: {
+      position: "relative",
+      height: theme.spacing(2),
+    },
   },
   price: {
     alignSelf: "flex-start",
@@ -111,20 +116,28 @@ export default function HomeCard(props) {
   return (
     <div className={classes.root}>
       <div className={classes.paper}>
-        <div className={classes.row}>
-          <i class="fas fa-users"></i>
+        <div className={classes.row} >
+          {//<i className="fas fa-users"></i>
+          }
           <Avatar alt="avatar" src={props.avatar} className={classes.avatar} />
 
           <div className={classes.col}>
             <div className={classes.row}>
               <div className={classes.name}>
-                <b>{Capitalize(props.tittle)}</b>{" "}
+                <b>{Capitalize(props.tittle)}</b>
+                <div style={{ clear: "both" }}></div>
                 <i style={{ color: "darkgrey" }}>{props.level}</i>
               </div>
-              <div className={classes.price}>
+              <div className="price-tag">
                 <b className={classes.priceFloatRight}>{props.price} zł</b>
               </div>
-              {props.type === 0 ? (
+              
+            </div>
+            <div className={classes.row}>
+              <div className={classes.locRow}>
+                <RoomIcon color="primary" className={classes.icon} />
+                {props.city}
+                {props.type === 0 ? (
                 <PersonIcon
                   color="action"
                   className={`${classes.icon} ${classes.type}`}
@@ -135,11 +148,6 @@ export default function HomeCard(props) {
                   className={`${classes.icon} ${classes.type}`}
                 />
               )}
-            </div>
-            <div className={classes.row}>
-              <div className={classes.locRow}>
-                <RoomIcon color="primary" className={classes.icon} />
-                {props.city}
               </div>
               <div className={classes.endDate}>
                 <i className={classes.priceFloatRight}>

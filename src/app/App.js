@@ -72,8 +72,10 @@ function App() {
 
   return isMobile ? (
     <div className={classes.root}>
-      {dataMobile.map((card) => (
+      {dataMobile.map((card, idx) => (
+                            <div key={idx}>
         <HomeCard
+        key={idx}
         type={card.type}
           level={card.level}
           avatar={card.avatar}
@@ -82,14 +84,17 @@ function App() {
           city={card.city}
           endTime={card.endDate}
           />
+          </div>
       ))}
     </div>
   ) : (
     <div className={classes.root}>
       <div className={classes.row}>
         <div className={classes.col}>
-          {dataDesktop1.map((card) => (
+          {dataDesktop1.map((card, idx) => (
+                            <div key={idx}>
             <HomeCard
+            key={idx}
             type={card.type}
             level={card.level}
             avatar={card.avatar} 
@@ -98,11 +103,14 @@ function App() {
               city={card.city}
               endTime={card.endDate}
               />
+              </div>
           ))}
         </div>
         <div className={classes.col}>
-          {dataDesktop2.map((card) => (
+          {dataDesktop2.map((card, idx) => (
+                            <div key={idx}>
             <HomeCard
+            key={idx}
             type={card.type}
             level={card.level}
             avatar={card.avatar}
@@ -111,6 +119,7 @@ function App() {
               city={card.city}
               endTime={card.endDate}
             />
+            </div>
           ))}
         </div>
       </div>

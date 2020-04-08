@@ -40,6 +40,10 @@ export default function LogOutButton() {
       window.location.reload();
     });
   }
+
+  async function handleMyCards() {
+
+  }
   
   return (
     <div>
@@ -68,6 +72,7 @@ export default function LogOutButton() {
       onClose={handleClose}
     >
       <MenuItem onClick={handleClose}><Link to='/profile' className={classes.link}>Profil</Link></MenuItem>
+      <MenuItem onClick={handleMyCards}><Link to='/myCards' className={classes.link}>Moje ogłoszenia</Link></MenuItem>
       <MenuItem onClick={handleLogOut}><Link to='/' className={classes.link}>Wyloguj</Link></MenuItem>
     </Menu>
   </div>

@@ -6,7 +6,8 @@ import { Route, Switch } from "react-router";
 import { ConnectedRouter } from "connected-react-router";
 import configureStore, { history } from "./store";
 import "./index.css";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import MyCards from "./app/MyCards/";
 import App from "./app/App";
 import Header from "./app/Header";
 import Profile from "./app/Profile";
@@ -22,6 +23,7 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" component={App} />
           <Route exact path="/profile" component={Profile} />
+          <Route exact path="/myCards" component={MyCards} />
           <Route render={() => <PageNotFound/>} />
         </Switch>
       </ConnectedRouter>
