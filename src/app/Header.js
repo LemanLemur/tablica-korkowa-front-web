@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ButtonAppBar() {
+export default function Header() {
   const classes = useStyles();
   const [isLogged, setIsLogged] = React.useState(false);
   const [openSnack, setOpenSnack] = React.useState(false);

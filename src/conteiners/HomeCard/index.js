@@ -113,6 +113,7 @@ export default function HomeCard(props) {
   }
 
   const classes = useStyles();
+  
   return (
     <div className={classes.root}>
       <div className={classes.paper}>

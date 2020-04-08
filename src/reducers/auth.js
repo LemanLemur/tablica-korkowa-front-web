@@ -3,7 +3,9 @@ import {
   LOG_IN_ERROR,
   LOG_IN_SUCCESS,
   LOG_OUT,
-  CLOSE_LOG_IN_MSG
+  CLOSE_LOG_IN_MSG,
+  SIGN_UP_SUCCESS,
+  SIGN_UP_ERROR,
 } from "../constants/actionTypes";
 
 const INIT_STATE = {
@@ -11,7 +13,7 @@ const INIT_STATE = {
   showMessage: false,
   error: null,
   initURL: "/",
-  authUser: localStorage.getItem("uid")
+  authUser: localStorage.getItem("uid"),
 };
 
 export default (state = INIT_STATE, action) => {
@@ -20,18 +22,34 @@ export default (state = INIT_STATE, action) => {
       return {
         ...state,
         authUser: action.payload.uid,
-        mail: action.payload.email
+        mail: action.payload.email,
       };
     }
     case LOG_IN_SUCCESS: {
-        return {
-          ...state,
-          alertMessage: "auth/success-login",
-          showMessage: true,
-          error: false,
-        };
-      }
+      return {
+        ...state,
+        alertMessage: "auth/success-login",
+        showMessage: true,
+        error: false,
+      };
+    }
+    case SIGN_UP_SUCCESS: {
+      return {
+        ...state,
+        alertMessage: "auth/success-register",
+        showMessage: true,
+        error: false,
+      };
+    }
     case LOG_IN_ERROR: {
+      return {
+        ...state,
+        showMessage: true,
+        alertMessage: action.payload.code,
+        error: true,
+      };
+    }
+    case SIGN_UP_ERROR: {
       return {
         ...state,
         showMessage: true,
@@ -42,7 +60,7 @@ export default (state = INIT_STATE, action) => {
     case LOG_OUT: {
       return {
         ...state,
-        authUser: null
+        authUser: null,
       };
     }
     case CLOSE_LOG_IN_MSG: {

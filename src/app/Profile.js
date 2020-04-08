@@ -79,7 +79,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ButtonAppBar() {
+export default function Profile() {
   const auth = useSelector(state => state.auth.authUser);
   const user = useSelector(state => state.user);
   const classes = useStyles();
