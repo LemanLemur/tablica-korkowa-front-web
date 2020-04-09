@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "8px",
     margin: "10px",
     width: "100%",
+    borderRadius: "5px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -62,10 +63,14 @@ const useStyles = makeStyles((theme) => ({
     margin: "5px",
     width: theme.spacing(12),
     height: theme.spacing(12),
+    border: "2px solid #3f51b5",
+    borderRadius: "inhereit",
     [theme.breakpoints.down("600")]: {
       width: theme.spacing(6),
       height: theme.spacing(6),
     },
+  },avatarIsHit: {
+    border: "3px solid gold",
   },
   name: {
     alignSelf: "flex-start",
@@ -103,9 +108,14 @@ const useStyles = makeStyles((theme) => ({
   },
   level: {
     color: "grey"
-  }
+  },
+  isHit: {
+    borderTop: "4px solid gold",
+    boxShadow: "-1px 3px 10px 1px rgb(218,165,32, 0.6)",
+  },
 
 }));
+
 
 export default function HomeCard(props) {
   function Capitalize(str) {
@@ -116,11 +126,13 @@ export default function HomeCard(props) {
   
   return (
     <div className={classes.root}>
-      <div className={classes.paper}>
+        {console.log(props.isHit)}
+                <div className={` ${props.isHit ? classes.isHit : ""} ${classes.paper} `}>
+
         <div className={classes.row} >
           {//<i className="fas fa-users"></i>
           }
-          <Avatar alt="avatar" src={props.avatar} className={classes.avatar} />
+          <Avatar alt="avatar" src={props.avatar} className={`${classes.avatar} ${props.isHit ? classes.avatarIsHit : ""}`} />
 
           <div className={classes.col}>
             <div className={classes.row}>

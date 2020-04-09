@@ -183,271 +183,282 @@ export default function MyCards() {
       <div className={classes.root}>
         <div className={classes.paper}>
           <div className="container-fluid">
-          <div className="row">
-          <div className="col-sm-12 col-md-3">
+            <div className="row">
+              <div className="col-sm-12 col-md-3">
 
-            <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-              <a className="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Ogłoszenia</a>
-              <a className="nav-link" id="v-pills-observe-tab" data-toggle="pill" href="#v-pills-observe" role="tab" aria-controls="v-pills-observe" aria-selected="false">Obserwowane</a>
-              <a className="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
-              <a className="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
-            </div>
-          </div>
-          <div className="col-sm-12 col-md-9 justifyContent">
-            <div className="tab-content" id="v-pills-tabContent">
-              <div className="tab-pane fade show active nav-pills" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-
-                <ul className="nav nav-tabs" id="myTab" role="tablist">
-                  <li className="nav-item">
-                    <a className="nav-link" id="draft-tab" data-toggle="tab" href="#draft" role="tab" aria-controls="draft" aria-selected="false">Szkic</a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" id="notactive-tab" data-toggle="tab" href="#notactive" role="tab" aria-controls="notactive" aria-selected="false">Nieaktywne</a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link active" id="active-tab" data-toggle="tab" href="#active" role="tab" aria-controls="active" aria-selected="true">Aktywne</a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" id="ended-tab" data-toggle="tab" href="#ended" role="tab" aria-controls="ended" aria-selected="false">Zakończone</a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" id="archive-tab" data-toggle="tab" href="#archive" role="tab" aria-controls="archive" aria-selected="false">Archiwalne</a>
-                  </li>
-                </ul>
-                <div className="tab-content" id="myTabContent">
-                  <div className="tab-pane fade" id="draft" role="tabpanel" aria-labelledby="draft-tab">
-                    <div>
-                      {isMobile ?
-                        <div>
-                          {dataMobile.filter(single => single.status === CARD_STATUS_DRAFT).map((card, idx) => (
-                            <div key={idx}>
-                              <HomeCard
-                                type={card.type}
-                                level={card.level}
-                                avatar={card.avatar}
-                                tittle={card.tittle}
-                                price={card.price}
-                                city={card.city}
-                                endTime={card.endDate}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                        :
-                        <div className={classes.root}>
-                          <div className={classes.row}>
-                            <div className={classes.col}>
-                              {dataDesktop1.filter(single => single.status === CARD_STATUS_DRAFT).map((card, idx) => (
-                                <div key={idx}>
-                                  <HomeCard
-
-                                    type={card.type}
-                                    level={card.level}
-                                    avatar={card.avatar}
-                                    tittle={card.tittle}
-                                    price={card.price}
-                                    city={card.city}
-                                    endTime={card.endDate}
-                                  />
-                                </div>
-                              ))}
-                            </div>
-
-                          </div>
-                        </div>
-                      }
-                    </div>
-
-                  </div>
-                  <div className="tab-pane fade" id="notactive" role="tabpanel" aria-labelledby="notactive-tab">
-                    <div>
-                      {isMobile ?
-                        <div>
-                          {dataMobile.filter(single => single.status === CARD_STATUS_NOTACTIVE).map((card, idx) => (
-                            <div key={idx}>
-                              <HomeCard
-                                type={card.type}
-                                level={card.level}
-                                avatar={card.avatar}
-                                tittle={card.tittle}
-                                price={card.price}
-                                city={card.city}
-                                endTime={card.endDate}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                        :
-                        <div className={classes.root}>
-                          <div className={classes.row}>
-                            <div className={classes.col}>
-                              {dataDesktop1.filter(single => single.status === CARD_STATUS_NOTACTIVE).map((card, idx) => (
-                                <div key={idx}>
-                                  <HomeCard
-
-                                    type={card.type}
-                                    level={card.level}
-                                    avatar={card.avatar}
-                                    tittle={card.tittle}
-                                    price={card.price}
-                                    city={card.city}
-                                    endTime={card.endDate}
-                                  />
-                                </div>
-                              ))}
-                            </div>
-
-                          </div>
-                        </div>
-                      }
-                    </div>
-
-                  </div>
-                  <div className="tab-pane fade show active" id="active" role="tabpanel" aria-labelledby="active-tab">
-
-                    <div>
-                      {isMobile ?
-                        <div>
-                          {dataMobile.filter(single => single.status === CARD_STATUS_ACTIVE).map((card, idx) => (
-                            <div key={idx}>
-                              <HomeCard
-                                type={card.type}
-                                level={card.level}
-                                avatar={card.avatar}
-                                tittle={card.tittle}
-                                price={card.price}
-                                city={card.city}
-                                endTime={card.endDate}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                        :
-                        <div className={classes.root}>
-                          <div className={classes.row}>
-                            <div className={classes.col}>
-                              {dataDesktop1.filter(single => single.status === CARD_STATUS_ACTIVE).map((card, idx) => (
-                                <div key={idx}>
-                                  <HomeCard
-
-                                    type={card.type}
-                                    level={card.level}
-                                    avatar={card.avatar}
-                                    tittle={card.tittle}
-                                    price={card.price}
-                                    city={card.city}
-                                    endTime={card.endDate}
-                                  />
-                                </div>
-                              ))}
-                            </div>
-
-                          </div>
-                        </div>
-                      }
-                    </div>
-
-
-
-                  </div>
-                  <div className="tab-pane fade" id="ended" role="tabpanel" aria-labelledby="ended-tab">
-                    <div>
-                      {isMobile ?
-                        <div>
-                          {dataMobile.filter(single => single.status === CARD_STATUS_ENDED).map((card, idx) => (
-                            <div key={idx}>
-                              <HomeCard
-                                type={card.type}
-                                level={card.level}
-                                avatar={card.avatar}
-                                tittle={card.tittle}
-                                price={card.price}
-                                city={card.city}
-                                endTime={card.endDate}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                        :
-                        <div className={classes.root}>
-                          <div className={classes.row}>
-                            <div className={classes.col}>
-                              {dataDesktop1.filter(single => single.status === CARD_STATUS_ENDED).map((card, idx) => (
-                                <div key={idx}>
-                                  <HomeCard
-
-                                    type={card.type}
-                                    level={card.level}
-                                    avatar={card.avatar}
-                                    tittle={card.tittle}
-                                    price={card.price}
-                                    city={card.city}
-                                    endTime={card.endDate}
-                                  />
-                                </div>
-                              ))}
-                            </div>
-
-                          </div>
-                        </div>
-                      }
-                    </div>
-
-
-                  </div>
-                  <div className="tab-pane fade" id="archive" role="tabpanel" aria-labelledby="archive-tab">
-                    <div>
-                      {isMobile ?
-                        <div>
-                          {dataMobile.filter(single => single.status === CARD_STATUS_ARCHIVE).map((card, idx) => (
-                            <div key={idx}>
-                              <HomeCard
-                                type={card.type}
-                                level={card.level}
-                                avatar={card.avatar}
-                                tittle={card.tittle}
-                                price={card.price}
-                                city={card.city}
-                                endTime={card.endDate}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                        :
-                        <div className={classes.root}>
-                          <div className={classes.row}>
-                            <div className={classes.col}>
-                              {dataDesktop1.filter(single => single.status === CARD_STATUS_ARCHIVE).map((card, idx) => (
-                                <div key={idx}>
-                                  <HomeCard
-
-                                    type={card.type}
-                                    level={card.level}
-                                    avatar={card.avatar}
-                                    tittle={card.tittle}
-                                    price={card.price}
-                                    city={card.city}
-                                    endTime={card.endDate}
-                                  />
-                                </div>
-                              ))}
-                            </div>
-
-                          </div>
-                        </div>
-                      }
-                    </div>
-
-                  </div>
+                <div className="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                  <a className="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Ogłoszenia</a>
+                  <a className="nav-link" id="v-pills-observe-tab" data-toggle="pill" href="#v-pills-observe" role="tab" aria-controls="v-pills-observe" aria-selected="false">Obserwowane</a>
+                  <a className="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+                  <a className="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
                 </div>
-
               </div>
-              <div className="tab-pane fade" id="v-pills-observe" role="tabpanel" aria-labelledby="v-pills-observe-tab">...</div>
-              <div className="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-              <div className="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+              <div className="col-sm-12 col-md-9 justifyContent">
+                <div className="tab-content" id="v-pills-tabContent">
+                  <div className="tab-pane fade show active nav-pills" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+
+                    <ul className="nav nav-tabs" id="myTab" role="tablist">
+                      <li className="nav-item">
+                        <a className="nav-link" id="draft-tab" data-toggle="tab" href="#draft" role="tab" aria-controls="draft" aria-selected="false">Szkic</a>
+                      </li>
+                      <li className="nav-item">
+                        <a className="nav-link" id="notactive-tab" data-toggle="tab" href="#notactive" role="tab" aria-controls="notactive" aria-selected="false">Nieaktywne</a>
+                      </li>
+                      <li className="nav-item">
+                        <a className="nav-link active" id="active-tab" data-toggle="tab" href="#active" role="tab" aria-controls="active" aria-selected="true">Aktywne</a>
+                      </li>
+                      <li className="nav-item">
+                        <a className="nav-link" id="ended-tab" data-toggle="tab" href="#ended" role="tab" aria-controls="ended" aria-selected="false">Zakończone</a>
+                      </li>
+                      <li className="nav-item">
+                        <a className="nav-link" id="archive-tab" data-toggle="tab" href="#archive" role="tab" aria-controls="archive" aria-selected="false">Archiwalne</a>
+                      </li>
+                    </ul>
+                    <div className="tab-content" id="myTabContent">
+                      <div className="tab-pane fade" id="draft" role="tabpanel" aria-labelledby="draft-tab">
+                        <div>
+                          {isMobile ?
+                            <div>
+                              {dataMobile.filter(single => single.status === CARD_STATUS_DRAFT).map((card, idx) => (
+                                <div key={idx}>
+                                  <HomeCard
+                                    isHit={card.isHit}
+                                    type={card.type}
+                                    level={card.level}
+                                    avatar={card.avatar}
+                                    tittle={card.tittle}
+                                    price={card.price}
+                                    city={card.city}
+                                    endTime={card.endDate}
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                            :
+                            <div className={classes.root}>
+                              <div className={classes.row}>
+                                <div className={classes.col}>
+                                  {dataDesktop1.filter(single => single.status === CARD_STATUS_DRAFT).map((card, idx) => (
+                                    <div key={idx}>
+                                      <HomeCard
+
+                                        isHit={card.isHit}
+                                        type={card.type}
+                                        level={card.level}
+                                        avatar={card.avatar}
+                                        tittle={card.tittle}
+                                        price={card.price}
+                                        city={card.city}
+                                        endTime={card.endDate}
+                                      />
+                                    </div>
+                                  ))}
+                                </div>
+
+                              </div>
+                            </div>
+                          }
+                        </div>
+
+                      </div>
+                      <div className="tab-pane fade" id="notactive" role="tabpanel" aria-labelledby="notactive-tab">
+                        <div>
+                          {isMobile ?
+                            <div>
+                              {dataMobile.filter(single => single.status === CARD_STATUS_NOTACTIVE).map((card, idx) => (
+                                <div key={idx}>
+                                  <HomeCard
+                                    isHit={card.isHit}
+                                    type={card.type}
+                                    level={card.level}
+                                    avatar={card.avatar}
+                                    tittle={card.tittle}
+                                    price={card.price}
+                                    city={card.city}
+                                    endTime={card.endDate}
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                            :
+                            <div className={classes.root}>
+                              <div className={classes.row}>
+                                <div className={classes.col}>
+                                  {dataDesktop1.filter(single => single.status === CARD_STATUS_NOTACTIVE).map((card, idx) => (
+                                    <div key={idx}>
+                                      <HomeCard
+
+                                        isHit={card.isHit}
+                                        type={card.type}
+                                        level={card.level}
+                                        avatar={card.avatar}
+                                        tittle={card.tittle}
+                                        price={card.price}
+                                        city={card.city}
+                                        endTime={card.endDate}
+                                      />
+                                    </div>
+                                  ))}
+                                </div>
+
+                              </div>
+                            </div>
+                          }
+                        </div>
+
+                      </div>
+                      <div className="tab-pane fade show active" id="active" role="tabpanel" aria-labelledby="active-tab">
+
+                        <div>
+                          {isMobile ?
+                            <div>
+                              {dataMobile.filter(single => single.status === CARD_STATUS_ACTIVE).map((card, idx) => (
+                                <div key={idx}>
+                                  <HomeCard
+                                    isHit={card.isHit}
+                                    type={card.type}
+                                    level={card.level}
+                                    avatar={card.avatar}
+                                    tittle={card.tittle}
+                                    price={card.price}
+                                    city={card.city}
+                                    endTime={card.endDate}
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                            :
+                            <div className={classes.root}>
+                              <div className={classes.row}>
+                                <div className={classes.col}>
+                                  {dataDesktop1.filter(single => single.status === CARD_STATUS_ACTIVE).map((card, idx) => (
+                                    <div key={idx}>
+                                    {console.log(card)}
+                                      <HomeCard
+
+                                        isHit={card.isHit}
+                                        type={card.type}
+                                        level={card.level}
+                                        avatar={card.avatar}
+                                        tittle={card.tittle}
+                                        price={card.price}
+                                        city={card.city}
+                                        endTime={card.endDate}
+                                      />
+                                    </div>
+                                  ))}
+                                </div>
+
+                              </div>
+                            </div>
+                          }
+                        </div>
+
+
+
+                      </div>
+                      <div className="tab-pane fade" id="ended" role="tabpanel" aria-labelledby="ended-tab">
+                        <div>
+                          {isMobile ?
+                            <div>
+                              {dataMobile.filter(single => single.status === CARD_STATUS_ENDED).map((card, idx) => (
+                                <div key={idx}>
+                                  <HomeCard
+                                    isHit={card.isHit}
+                                    type={card.type}
+                                    level={card.level}
+                                    avatar={card.avatar}
+                                    tittle={card.tittle}
+                                    price={card.price}
+                                    city={card.city}
+                                    endTime={card.endDate}
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                            :
+                            <div className={classes.root}>
+                              <div className={classes.row}>
+                                <div className={classes.col}>
+                                  {dataDesktop1.filter(single => single.status === CARD_STATUS_ENDED).map((card, idx) => (
+                                    <div key={idx}>
+                                      <HomeCard
+
+                                        isHit={card.isHit}
+                                        type={card.type}
+                                        level={card.level}
+                                        avatar={card.avatar}
+                                        tittle={card.tittle}
+                                        price={card.price}
+                                        city={card.city}
+                                        endTime={card.endDate}
+                                      />
+                                    </div>
+                                  ))}
+                                </div>
+
+                              </div>
+                            </div>
+                          }
+                        </div>
+
+
+                      </div>
+                      <div className="tab-pane fade" id="archive" role="tabpanel" aria-labelledby="archive-tab">
+                        <div>
+                          {isMobile ?
+                            <div>
+                              {dataMobile.filter(single => single.status === CARD_STATUS_ARCHIVE).map((card, idx) => (
+                                <div key={idx}>
+                                  <HomeCard
+                                    isHit={card.isHit}
+                                    type={card.type}
+                                    level={card.level}
+                                    avatar={card.avatar}
+                                    tittle={card.tittle}
+                                    price={card.price}
+                                    city={card.city}
+                                    endTime={card.endDate}
+                                  />
+                                </div>
+                              ))}
+                            </div>
+                            :
+                            <div className={classes.root}>
+                              <div className={classes.row}>
+                                <div className={classes.col}>
+                                  {dataDesktop1.filter(single => single.status === CARD_STATUS_ARCHIVE).map((card, idx) => (
+                                    <div key={idx}>
+                                      <HomeCard
+
+                                        isHit={card.isHit}
+                                        type={card.type}
+                                        level={card.level}
+                                        avatar={card.avatar}
+                                        tittle={card.tittle}
+                                        price={card.price}
+                                        city={card.city}
+                                        endTime={card.endDate}
+                                      />
+                                    </div>
+                                  ))}
+                                </div>
+
+                              </div>
+                            </div>
+                          }
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </div>
+                  <div className="tab-pane fade" id="v-pills-observe" role="tabpanel" aria-labelledby="v-pills-observe-tab">...</div>
+                  <div className="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+                  <div className="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+                </div>
+              </div>
             </div>
-          </div>
-          </div>
           </div>
         </div>
       </div>
