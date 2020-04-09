@@ -103,6 +103,10 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "flex-end",
     margin: "10px",
   },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
 }));
 
 function TextMaskCustom(props) {
@@ -125,7 +129,7 @@ TextMaskCustom.propTypes = {
   inputRef: PropTypes.func.isRequired,
 };
 
-function App() {
+export default function RegisterForm() {
   const classes = useStyles();
   const [isMobile, setIsMobile] = React.useState(false);
   const [values, setValues] = React.useState({ textmask: "" });
@@ -284,9 +288,6 @@ function App() {
 
   return (
     <div className={classes.root} onKeyDown={(e) => handleKeyDown(e)}>
-      <Backdrop className={classes.backdrop} open={open}>
-        <CircularProgress color="secondary" />
-      </Backdrop>
       <div className={classes.paper}>
         <div className={classes.row}>
           <div className={classes.col}>
@@ -423,7 +424,7 @@ function App() {
                 color="primary"
                 className={classes.button}
               >
-                Dalej
+                Rejestruj
               </Button>
             </div>
           </div>
@@ -443,8 +444,10 @@ function App() {
           )}
         </div>
       </div>
+      
+      <Backdrop className={classes.backdrop} open={open}>
+        <CircularProgress color="secondary" />
+      </Backdrop>
     </div>
   );
 }
-
-export default App;

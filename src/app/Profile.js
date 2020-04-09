@@ -8,6 +8,7 @@ import "./index.css";
 import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
+import ProfileBox from "../conteiners/ProfileBox"
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -109,58 +110,6 @@ export default function Profile() {
   return isLoading ? (
     <ProfileSkeleton />
   ) : (
-    <div className={classes.root}>
-      <div className={classes.paper}>
-        <div className={classes.divRow}>
-          <Avatar
-            alt={user.email}
-            src={user.avatar}
-            className={classes.avatar}
-          />
-          <Typography variant="h5" color="primary">
-            {user.firstName} {user.lastName}
-          </Typography>
-        </div>
-
-        <div className={classes.divOneRowLeft}>
-          Dane profilu:
-        </div>
-
-        <div className={classes.divDataCol}>
-          <div className={classes.divDataRow}>
-            <Typography variant="h7" color="textPrimary">
-              Imię:
-            </Typography>
-            <Typography variant="h6" color="primary">
-              {user.firstName}
-            </Typography>
-          </div>
-          <div className={classes.divDataRow}>
-            <Typography variant="h7" color="textPrimary">
-              Nazwisko:
-            </Typography>
-            <Typography variant="h6" color="primary">
-              {user.lastName}
-            </Typography>
-          </div>
-          <div className={classes.divDataRow}>
-            <Typography variant="h7" color="textPrimary">
-              E-mail:
-            </Typography>
-            <Typography variant="h6" color="primary">
-              {user.email}
-            </Typography>
-          </div>
-          <div className={classes.divDataRow}>
-            <Typography variant="h7" color="textPrimary">
-              Telefon:
-            </Typography>
-            <Typography variant="h6" color="primary">
-              {user.telephone}
-            </Typography>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ProfileBox user={user}/>
   );
 }

@@ -133,7 +133,6 @@ export default function LogInDialog() {
         dispatch({ type: LOG_IN, payload: res.user });
         localStorage.setItem("uid", res.user.uid);
         axios.get(GET_USER_BY_AID_URL + res.user.uid).then((res) => {
-          // console.log(res.data);
           localStorage.setItem("user_n", res.data[0].firstName);
           localStorage.setItem("user_a", res.data[0].avatar);
           localStorage.setItem("user_id", res.data[0].id);
@@ -206,9 +205,9 @@ export default function LogInDialog() {
               <Link
                 onClick={handleClose}
                 to="/sign-up"
-                style={{ textDecoration: "none", color: "#1976d2" }}
+                style={{ textDecoration: "none", color: "#eb3b5a" }}
               >
-                tutaj
+               , tutaj
               </Link>
               .
             </div>
@@ -238,9 +237,9 @@ export default function LogInDialog() {
               <Link
                 onClick={handleClose}
                 to="/sign-up"
-                style={{ textDecoration: "none", color: "#1976d2" }}
+                style={{ textDecoration: "none", color: "#eb3b5a" }}
               >
-                tutaj
+               , tutaj
               </Link>
               .
             </div>
