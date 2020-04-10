@@ -9,13 +9,13 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     margin: "20px",
     marginTop: "50px",
-    width: "800px",
-    [theme.breakpoints.down(800)]: {
-      width: "500px",
-    },
-    [theme.breakpoints.down(550)]: {
-      width: "300px",
-    },
+    width: "80%",
+    // [theme.breakpoints.down(800)]: {
+    //   width: "500px",
+    // },
+    // [theme.breakpoints.down(550)]: {
+    //   width: "300px",
+    // },
   },
   paper: {
     margin: "12px",
@@ -87,6 +87,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MainContainer(props) {
   const classes = useStyles();
   const [isMobile, setIsMobile] = React.useState(false);
+  const [divideLogo, setDivideLogo] = React.useState(false);
   const [Width, setWidth] = React.useState({
     width: "100%",
     alignItems: "flex-end",
@@ -103,9 +104,13 @@ export default function MainContainer(props) {
   }, []);
 
   function handleResize() {
-    if (window.innerWidth <= 800) {
+    if (window.innerWidth >= 1080) {
+      setDivideLogo(false);
+    } else if (window.innerWidth <= 800) {
+      setDivideLogo(true);
       setIsMobile(true);
     } else {
+      setDivideLogo(true);
       setIsMobile(false);
     }
   }
@@ -118,7 +123,14 @@ export default function MainContainer(props) {
             {isMobile ? null : (
               <div className={classes.col} style={Width}>
                 <div className={classes.logo}>
-                  <div className={classes.title}>Tablica korkowa</div>
+                  {divideLogo ? (
+                    <div className={classes.col}>
+                      <div className={classes.title}>Tablica</div>
+                      <div className={classes.title}>korkowa</div>
+                    </div>
+                  ) : (
+                    <div className={classes.title}>Tablica korkowa</div>
+                  )}
                 </div>
               </div>
             )}
