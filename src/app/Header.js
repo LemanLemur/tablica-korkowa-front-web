@@ -11,17 +11,18 @@ import { CLOSE_LOG_IN_MSG } from "../constants/actionTypes";
 import UserMenu from "../components/UserMenu";
 import { Link } from "react-router-dom";
 import "./index.css";
+import { useHistory } from "react-router-dom";
 
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { returnErrorMsg } from "../functions/returnErrorMessage";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2)
+    marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
@@ -31,29 +32,33 @@ const useStyles = makeStyles(theme => ({
     textDecoration: "none",
     color: "white",
     [theme.breakpoints.down("xs")]: {
-      fontSize: "22px"
+      fontSize: "22px",
+    },
+    '&:hover': {
+    textShadow: "3px 3px 3px black"
     }
   },
   text: {
     flexGrow: 1,
     [theme.breakpoints.down("xs")]: {
-      display: "none"
-    }
+      display: "none",
+    },
   },
   userDiv: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 }));
 
 export default function Header() {
   const classes = useStyles();
   const [isLogged, setIsLogged] = React.useState(false);
   const [openSnack, setOpenSnack] = React.useState(false);
-  const auth = useSelector(state => state.auth);
-  const user = useSelector(state => state.user);
+  const auth = useSelector((state) => state.auth);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     if (localStorage.getItem("uid")) {
@@ -77,6 +82,10 @@ export default function Header() {
     dispatch({ type: CLOSE_LOG_IN_MSG });
   };
 
+  function handleClickLogo(){
+    history.push("/");
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -89,9 +98,9 @@ export default function Header() {
           >
             <MenuIcon />
           </IconButton>
-          <Link to="/" className={classes.title}>
+          <div onClick={handleClickLogo} className={classes.title}>
             Tablica Korkowa
-          </Link>
+          </div>
           {isLogged ? (
             <div className={classes.userDiv}>
               <Typography variant="h7" className={classes.text}>
