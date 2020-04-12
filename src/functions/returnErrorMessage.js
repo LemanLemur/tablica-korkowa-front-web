@@ -15,6 +15,9 @@ export function returnErrorMsg(code) {
     case "auth/success-register": {
       return "Rejestracja zakończona sukcesem.";
     }
+    case "auth/success-deleted": {
+      return "Usuwanie konta zakończone sukcesem.";
+    }
     default:
       return "Nieoczekiwany błąd!";
   }

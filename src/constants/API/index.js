@@ -7,3 +7,4 @@ export const GET_CARDS_BY_ID = "http://localhost:3001/cards/";
 
 export const UPDATE_USER = "http://localhost:3001/users/";
 export const POST_REGISTER_USER = "http://localhost:3001/users/";
+export const DELETE_USER = "http://localhost:3001/users/";

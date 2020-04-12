@@ -6,6 +6,7 @@ export const SIGN_UP_ERROR = "LOG_IN_ERROR";
 export const LOG_OUT = "LOG_OUT";
 export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS";
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
+export const ACCOUNT_DELETE_SUCCESS = "ACCOUNT_DELETE_SUCCESS";
 export const CLOSE_LOG_IN_MSG = "CLOSE_LOG_IN_MSG";
 
 //User const

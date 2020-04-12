@@ -6,6 +6,7 @@ import {
   CLOSE_LOG_IN_MSG,
   SIGN_UP_SUCCESS,
   SIGN_UP_ERROR,
+  ACCOUNT_DELETE_SUCCESS
 } from "../constants/actionTypes";
 
 const INIT_STATE = {
@@ -37,6 +38,14 @@ export default (state = INIT_STATE, action) => {
       return {
         ...state,
         alertMessage: "auth/success-register",
+        showMessage: true,
+        error: false,
+      };
+    }
+    case ACCOUNT_DELETE_SUCCESS: {
+      return {
+        ...state,
+        alertMessage: "auth/success-deleted",
         showMessage: true,
         error: false,
       };
