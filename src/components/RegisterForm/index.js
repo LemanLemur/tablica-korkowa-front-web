@@ -237,7 +237,7 @@ export default function RegisterForm() {
     ) {
       setOpen(true);
       setValid(true);
-      var tel = values.textmask.replace("-", " ");
+      var tel = values.textmask.split("-").join(" ");
       try {
         await firebase.register(mail, pass).then((res) => {
           var UID = res.uid;

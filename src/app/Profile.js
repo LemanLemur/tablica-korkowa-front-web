@@ -5,10 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { LOAD_USER, START_LOAD_DATA } from "../constants/actionTypes";
 import ProfileSkeleton from "../conteiners/ProfileSkeleton/ProfileSkeleton";
 import "./index.css";
-import { Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Avatar from "@material-ui/core/Avatar";
-import ProfileBox from "../conteiners/ProfileBox"
+import ProfileBox from "../components/ProfileBox"
 
 const useStyles = makeStyles(theme => ({
   root: {

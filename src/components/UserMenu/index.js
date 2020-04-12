@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   link: {
@@ -19,6 +20,7 @@ const useStyles = makeStyles(theme => ({
 export default function LogOutButton() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
 
 //   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -33,6 +35,7 @@ export default function LogOutButton() {
   };
 
   async function handleLogOut() {
+    history.push("/");
     await firebase.logout().then(() => {
       dispatch({ type: LOG_OUT });
       localStorage.removeItem('uid');
@@ -42,7 +45,11 @@ export default function LogOutButton() {
   }
 
   async function handleMyCards() {
+    history.push("/myCards");
+  }
 
+  async function handleProfile() {
+    history.push("/profile");
   }
   
   return (
@@ -71,9 +78,9 @@ export default function LogOutButton() {
       open={open}
       onClose={handleClose}
     >
-      <MenuItem onClick={handleClose}><Link to='/profile' className={classes.link}>Profil</Link></MenuItem>
-      <MenuItem onClick={handleMyCards}><Link to='/myCards' className={classes.link}>Moje ogłoszenia</Link></MenuItem>
-      <MenuItem onClick={handleLogOut}><Link to='/' className={classes.link}>Wyloguj</Link></MenuItem>
+      <MenuItem onClick={handleProfile}>Profil</MenuItem>
+      <MenuItem onClick={handleMyCards}>Moje ogłoszenia</MenuItem>
+      <MenuItem onClick={handleLogOut}>Wyloguj</MenuItem>
     </Menu>
   </div>
   );
