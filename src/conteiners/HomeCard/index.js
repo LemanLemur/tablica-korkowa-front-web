@@ -137,10 +137,11 @@ export default function HomeCard(props) {
    
 
     <div className={classes.root} key ={props.id}> 
-    {console.log()}
+    {console.log(props.id)}
     <Link to = {{
       pathname:'/cardPage',
-      ID: props.id
+      ID: props.id,
+      userID: props.userID
     }}
   >
         
