@@ -225,6 +225,7 @@ export default function MyCards() {
                               {dataMobile.filter(single => single.status === CARD_STATUS_DRAFT).map((card, idx) => (
                                 <div key={idx}>
                                   <HomeCard
+                                    userID={card.userID}
                                     id={card.id}
                                     isHit={card.isHit}
                                     type={card.type}
@@ -246,7 +247,8 @@ export default function MyCards() {
                                     <div key={idx}>
                                       <HomeCard
 
-id={card.id}
+                                        userID={card.userID}
+                                        id={card.id}
                                         isHit={card.isHit}
                                         type={card.type}
                                         level={card.level}
@@ -273,6 +275,7 @@ id={card.id}
                               {dataMobile.filter(single => single.status === CARD_STATUS_NOTACTIVE).map((card, idx) => (
                                 <div key={idx}>
                                   <HomeCard
+                                    userID={card.userID}
                                     id={card.id}
                                     isHit={card.isHit}
                                     type={card.type}
@@ -294,7 +297,8 @@ id={card.id}
                                     <div key={idx}>
                                       <HomeCard
 
-id={card.id}
+                                        userID={card.userID}
+                                        id={card.id}
                                         isHit={card.isHit}
                                         type={card.type}
                                         level={card.level}
@@ -322,6 +326,7 @@ id={card.id}
                               {dataMobile.filter(single => single.status === CARD_STATUS_ACTIVE).map((card, idx) => (
                                 <div key={idx}>
                                   <HomeCard
+                                    userID={card.userID}
                                     id={card.id}
                                     isHit={card.isHit}
                                     type={card.type}
@@ -341,10 +346,11 @@ id={card.id}
                                 <div className={classes.col}>
                                   {dataDesktop1.filter(single => single.status === CARD_STATUS_ACTIVE).map((card, idx) => (
                                     <div key={idx}>
-                                    {console.log(card)}
+                                      {console.log(card)}
                                       <HomeCard
+                                        userID={card.userID}
 
-id={card.id}
+                                        id={card.id}
                                         isHit={card.isHit}
                                         type={card.type}
                                         level={card.level}
@@ -373,6 +379,7 @@ id={card.id}
                               {dataMobile.filter(single => single.status === CARD_STATUS_ENDED).map((card, idx) => (
                                 <div key={idx}>
                                   <HomeCard
+                                    userID={card.userID}
                                     id={card.id}
                                     isHit={card.isHit}
                                     type={card.type}
@@ -394,7 +401,8 @@ id={card.id}
                                     <div key={idx}>
                                       <HomeCard
 
-id={card.id}
+                                        userID={card.userID}
+                                        id={card.id}
                                         isHit={card.isHit}
                                         type={card.type}
                                         level={card.level}
@@ -422,6 +430,7 @@ id={card.id}
                               {dataMobile.filter(single => single.status === CARD_STATUS_ARCHIVE).map((card, idx) => (
                                 <div key={idx}>
                                   <HomeCard
+                                    userID={card.userID}
                                     id={card.id}
                                     isHit={card.isHit}
                                     type={card.type}
@@ -443,7 +452,8 @@ id={card.id}
                                     <div key={idx}>
                                       <HomeCard
 
-id={card.id}
+                                        userID={card.userID}
+                                        id={card.id}
                                         isHit={card.isHit}
                                         type={card.type}
                                         level={card.level}

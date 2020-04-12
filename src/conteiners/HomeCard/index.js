@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(6),
       height: theme.spacing(6),
     },
-  },avatarIsHit: {
+  }, avatarIsHit: {
     border: "3px solid #3f51b5",
   },
   name: {
@@ -117,10 +117,10 @@ const useStyles = makeStyles((theme) => ({
     borderTopWidth: "4px",
     borderStyle: "solid",
     backgroundColor: "#fff6cb",
-    borderBottom:"0",
-    borderLeft:"0",
-    borderRight:"0"
-    
+    borderBottom: "0",
+    borderLeft: "0",
+    borderRight: "0"
+
   },
 
 }));
@@ -132,63 +132,63 @@ export default function HomeCard(props) {
   }
 
   const classes = useStyles();
-  
+
   return (
-   
 
-    <div className={classes.root} key ={props.id}> 
-    {console.log(props.id)}
-    <Link to = {{
-      pathname:'/cardPage',
-      ID: props.id,
-      userID: props.userID
-    }}
-  >
-        
-                <div className={`${props.isHit ? classes.isHit : ""} ${classes.paper} `}>
 
-        <div className={classes.row} >
-          {//<i className="fas fa-users"></i>
-          }
-          <Avatar alt="avatar" src={props.avatar} className={`${classes.avatar} ${props.isHit ? classes.avatarIsHit : ""}`} />
-          <div className={classes.col}>
-            <div className={classes.row}>
-              <div className={classes.name}>
-                <b>{props.tittle.length >=60 ? Capitalize(props.tittle.toString().substring(0,60) + "...") : Capitalize(props.tittle)}</b>
-                <div style={{ clear: "both" }}></div>
-                <i style={{ color: "darkgrey" }}>{props.level}</i>
+    <div className={classes.root} key={props.id}>
+      {console.log(props.id)}
+      <Link to={{
+        pathname: '/cardPage',
+        ID: props.id,
+        userID: props.userID
+      }}
+      >
+
+        <div className={`${props.isHit ? classes.isHit : ""} ${classes.paper} `}>
+
+          <div className={classes.row} >
+            {//<i className="fas fa-users"></i>
+            }
+            <Avatar alt="avatar" src={props.avatar} className={`${classes.avatar} ${props.isHit ? classes.avatarIsHit : ""}`} />
+            <div className={classes.col}>
+              <div className={classes.row}>
+                <div className={classes.name}>
+                  <b>{props.tittle.length >= 60 ? Capitalize(props.tittle.toString().substring(0, 60) + "...") : Capitalize(props.tittle)}</b>
+                  <div style={{ clear: "both" }}></div>
+                  <i style={{ color: "darkgrey" }}>{props.level}</i>
+                </div>
+                <div className="price-tag">
+                  <b className={classes.priceFloatRight}>{props.price} zł</b>
+                </div>
+
               </div>
-              <div className="price-tag">
-                <b className={classes.priceFloatRight}>{props.price} zł</b>
-              </div>
-              
-            </div>
-            <div className={classes.row}>
-              <div className={classes.locRow}>
-                <RoomIcon color="primary" className={classes.icon} />
-                {props.city}
-                {props.type === 0 ? (
-                <PersonIcon
-                  color="action"
-                  className={`${classes.icon} ${classes.type}`}
-                />
-              ) : (
-                <GroupIcon
-                  color="action"
-                  className={`${classes.icon} ${classes.type}`}
-                />
-              )}
-              </div>
-              <div className={classes.endDate}>
-                <i className={classes.priceFloatRight}>
-                  {timeConverter(props.endTime, true, true, true, true, true)}{" "}
-                </i>
+              <div className={classes.row}>
+                <div className={classes.locRow}>
+                  <RoomIcon color="primary" className={classes.icon} />
+                  {props.city}
+                  {props.type === 0 ? (
+                    <PersonIcon
+                      color="action"
+                      className={`${classes.icon} ${classes.type}`}
+                    />
+                  ) : (
+                      <GroupIcon
+                        color="action"
+                        className={`${classes.icon} ${classes.type}`}
+                      />
+                    )}
+                </div>
+                <div className={classes.endDate}>
+                  <i className={classes.priceFloatRight}>
+                    {timeConverter(props.endTime, true, true, true, true, true)}{" "}
+                  </i>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
     </div>
 
   );
