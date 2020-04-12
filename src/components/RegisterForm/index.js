@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
-    color: '#fff',
+    color: "#fff",
   },
 }));
 
@@ -132,8 +132,9 @@ TextMaskCustom.propTypes = {
 export default function RegisterForm() {
   const classes = useStyles();
   const [isMobile, setIsMobile] = React.useState(false);
-  const [values, setValues] = React.useState({ textmask: "" });
+  const [values, setValues] = React.useState("");
   const [validName, setValidName] = React.useState(true);
+  const [validTel, setValidTel] = React.useState(true);
   const [validSurname, setValidSurname] = React.useState(true);
   const [validMail, setValidMail] = React.useState(true);
   const [validPassword, setValidPassword] = React.useState(true);
@@ -180,6 +181,18 @@ export default function RegisterForm() {
 
   const handleChange = (event) => {
     setValues(event.target.value);
+    if (event.target.value.match(/\d/g)) {
+      if (event.target.value.match(/\d/g).length === 9) {
+        setValues(event.target.value.split("-").join(" "));
+        setValidTel(true);
+      } else {
+        setValidTel(false);
+      }
+    } else {
+      setValidTel(true);
+    }
+    console.log(values);
+    console.log(validTel);
   };
 
   const handleChangeName = (event) => {
@@ -237,7 +250,12 @@ export default function RegisterForm() {
     ) {
       setOpen(true);
       setValid(true);
-      var tel = values.textmask.split("-").join(" ");
+      var tel;
+      if (validTel) {
+        tel = values.split("-").join(" ");
+      } else {
+        tel = "";
+      }
       try {
         await firebase.register(mail, pass).then((res) => {
           var UID = res.uid;
@@ -259,6 +277,7 @@ export default function RegisterForm() {
               dispatch({ type: SIGN_UP_SUCCESS });
               setOpen(false);
               history.push("/");
+              window.location.reload();
             });
         });
       } catch (error) {
@@ -391,7 +410,7 @@ export default function RegisterForm() {
                   Telefon
                 </InputLabel>
                 <Input
-                  value={values.textmask}
+                  value={values}
                   onChange={handleChange}
                   name="textmask"
                   id="formatted-text-mask-input"
@@ -444,7 +463,7 @@ export default function RegisterForm() {
           )}
         </div>
       </div>
-      
+
       <Backdrop className={classes.backdrop} open={open}>
         <CircularProgress color="secondary" />
       </Backdrop>

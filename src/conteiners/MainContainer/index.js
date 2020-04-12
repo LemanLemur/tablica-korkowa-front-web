@@ -90,6 +90,7 @@ export default function MainContainer(props) {
   const [divideLogo, setDivideLogo] = React.useState(false);
   const [Width, setWidth] = React.useState({
     width: "100%",
+    minHeight: "500px",
     alignItems: "flex-end",
   });
 
@@ -98,9 +99,12 @@ export default function MainContainer(props) {
     handleResize();
 
     if (props.width !== "undefined") {
-      setWidth({ width: props.width, alignItems: "flex-end" });
+      setWidth({
+        width: props.width,
+        minHeight: "500px",
+        alignItems: "flex-end",
+      });
     }
-    console.log(Width);
   }, []);
 
   function handleResize() {

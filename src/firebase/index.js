@@ -19,6 +19,11 @@ const firebaseConfig = {
         this.auth = app.auth();
       }
 
+      googleLogin(){
+        var provider = new app.auth.GoogleAuthProvider();
+        return app.auth().signInWithPopup(provider);
+      }
+
       login(email, password){
           return this.auth.signInWithEmailAndPassword(email, password)
       }
@@ -30,6 +35,22 @@ const firebaseConfig = {
       async register(email, password){
           await this.auth.createUserWithEmailAndPassword(email, password)
           return this.auth.currentUser;
+      }
+
+      delete(){
+          return this.auth.currentUser.delete();
+      }
+
+      resetPassEmail(emailAddress){
+          return this.auth.sendPasswordResetEmail(emailAddress);
+      }
+
+      resetPass(newPassword){
+          return this.auth().currentUser.updatePassword(newPassword);
+      }
+
+      resetEmail(newEmail){
+          return this.auth().currentUser.updatePassword(newEmail);
       }
   }
 

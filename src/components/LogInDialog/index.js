@@ -9,6 +9,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import { Link } from "react-router-dom";
 import firebase from "../../firebase";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
 import {
   LOG_IN,
   LOAD_USER,
@@ -17,7 +18,11 @@ import {
   LOG_IN_SUCCESS,
 } from "../../constants/actionTypes";
 import axios from "axios";
-import { LAST_LOG_UPDATE_URL, GET_USER_BY_AID_URL } from "../../constants/API";
+import {
+  LAST_LOG_UPDATE_URL,
+  GET_USER_BY_AID_URL,
+  POST_REGISTER_USER,
+} from "../../constants/API";
 import { useSelector, useDispatch } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
@@ -62,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   button: {
     borderColor: "white",
     color: "white",
-  }
+  },
 }));
 
 export default function LogInDialog() {
@@ -132,6 +137,7 @@ export default function LogInDialog() {
       await firebase.login(email, password).then((res) => {
         dispatch({ type: LOG_IN, payload: res.user });
         localStorage.setItem("uid", res.user.uid);
+
         axios.get(GET_USER_BY_AID_URL + res.user.uid).then((res) => {
           localStorage.setItem("user_n", res.data[0].firstName);
           localStorage.setItem("user_a", res.data[0].avatar);
@@ -139,6 +145,63 @@ export default function LogInDialog() {
           dispatch({ type: LOAD_USER, payload: res.data[0] });
           axios.put(LAST_LOG_UPDATE_URL + res.data[0].id);
           dispatch({ type: LOG_IN_SUCCESS });
+        });
+      });
+    } catch (error) {
+      dispatch({ type: LOG_IN_ERROR, payload: error });
+    }
+  }
+
+  async function handleGoogleLogin() {
+    try {
+      await firebase.googleLogin().then((res) => {
+        localStorage.setItem("uid", res.user.uid);
+        dispatch({ type: LOG_IN, payload: res.user });
+        console.log(res);
+        var google = res;
+        var promise1;
+
+        promise1 = new Promise(function (resolve, reject) {
+          axios
+            .get(GET_USER_BY_AID_URL + res.user.uid)
+            .then((res) => {
+              reject();
+              localStorage.setItem("user_n", res.data[0].firstName);
+              localStorage.setItem("user_a", res.data[0].avatar);
+              localStorage.setItem("user_id", res.data[0].id);
+              dispatch({ type: LOAD_USER, payload: res.data[0] });
+              axios.put(LAST_LOG_UPDATE_URL + res.data[0].id);
+              dispatch({ type: LOG_IN_SUCCESS });
+            })
+            .catch(function (error) {
+              if (error.response.status === 404) {
+                axios
+                  .post(POST_REGISTER_USER, {
+                    accountID: google.user.uid,
+                    firstname: google.additionalUserInfo.profile.given_name,
+                    lastname: google.additionalUserInfo.profile.family_name,
+                    email: google.user.email,
+                    avatar: google.user.photoURL,
+                    telephone: google.user.phoneNumber,
+                  })
+                  .then((res) => {
+                    resolve(res);
+                  });
+              } else {
+                dispatch({ type: LOG_IN_ERROR, payload: error });
+              }
+            });
+        });
+
+        promise1.then(function () {
+          axios.get(GET_USER_BY_AID_URL + google.user.uid).then((res) => {
+            localStorage.setItem("user_n", res.data[0].firstName);
+            localStorage.setItem("user_a", res.data[0].avatar);
+            localStorage.setItem("user_id", res.data[0].id);
+            dispatch({ type: LOAD_USER, payload: res.data[0] });
+            axios.put(LAST_LOG_UPDATE_URL + res.data[0].id);
+            dispatch({ type: LOG_IN_SUCCESS });
+          });
         });
       });
     } catch (error) {
@@ -156,7 +219,11 @@ export default function LogInDialog() {
 
   return (
     <React.Fragment>
-      <Button variant="outlined" className={classes.button} onClick={handleClickOpen}>
+      <Button
+        variant="outlined"
+        className={classes.button}
+        onClick={handleClickOpen}
+      >
         Zaloguj
       </Button>
       <Dialog
@@ -195,23 +262,47 @@ export default function LogInDialog() {
                 type="password"
                 onKeyDown={(e) => handleKeyDown(e)}
               />
+              <ButtonGroup>
+                <Button
+                  style={{
+                    padding: "0px",
+                    fontSize: "20px",
+                    marginTop: "30px",
+                    background: "RGB(202,65,47)",
+                    color: "white",
+                  }}
+                  onClick={handleGoogleLogin}
+                >
+                  G+
+                </Button>
+                <Button
+                  style={{
+                    marginTop: "30px",
+                    background: "RGB(202,65,47)",
+                    color: "white",
+                  }}
+                  onClick={handleGoogleLogin}
+                >
+                  Zaloguj przez Google
+                </Button>
+              </ButtonGroup>
             </div>
           )}
         </DialogContent>
         {isMobile ? (
           <DialogActions className={classes.col}>
-            <div className={classes.link} style={{marginRight: "0px"}}>
-              Nie masz jeszcze konta? Kliknij 
+            <div className={classes.link} style={{ marginRight: "0px" }}>
+              Nie masz jeszcze konta? Kliknij
               <Link
                 onClick={handleClose}
                 to="/sign-up"
                 style={{ textDecoration: "none", color: "#eb3b5a" }}
               >
-               , tutaj
+                , tutaj
               </Link>
               .
             </div>
-            <center style={{marginLeft: "0px"}}>
+            <center style={{ marginLeft: "0px" }}>
               <Button
                 variant="outlined"
                 onClick={handleClose}
@@ -233,13 +324,13 @@ export default function LogInDialog() {
         ) : (
           <DialogActions>
             <div className={classes.link}>
-              Nie masz jeszcze konta? Kliknij 
+              Nie masz jeszcze konta? Kliknij
               <Link
                 onClick={handleClose}
                 to="/sign-up"
                 style={{ textDecoration: "none", color: "#eb3b5a" }}
               >
-               , tutaj
+                , tutaj
               </Link>
               .
             </div>

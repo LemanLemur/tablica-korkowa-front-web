@@ -41,7 +41,7 @@ function App() {
   }, [dataMobile]);
 
   async function fetchData() {
-    await axios.get("http://localhost:3001/cards/NewestCards/3").then((res) => {
+    await axios.get("http://localhost:3001/cards/NewestCards/10").then((res) => {
       setDataMobile(res.data);
     });
   }
@@ -86,7 +86,7 @@ function App() {
           city={card.city}
           endTime={card.endDate}
           />
-          </div>
+        </div>
       ))}
     </div>
   ) : (
@@ -107,7 +107,7 @@ function App() {
               city={card.city}
               endTime={card.endDate}
               />
-              </div>
+            </div>
           ))}
         </div>
         <div className={classes.col}>
