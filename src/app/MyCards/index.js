@@ -44,7 +44,8 @@ const useStyles = makeStyles(theme => ({
     //justifyContent: "center",
     border: "0px solid grey",
     borderTop: "4px solid #3f51b5",
-    boxShadow: "-1px 3px 10px 1px rgba(0,0,0,0.25)"
+    boxShadow: "-1px 3px 10px 1px rgba(0,0,0,0.25)",
+    background: "#fff"
   },
   divRow: {
     padding: "0px",
@@ -138,6 +139,8 @@ export default function MyCards() {
 
   useEffect(() => {
     getUserData();
+    window.addEventListener("resize", handleResize);
+    handleResize();
   }, []);
 
   useEffect(() => {
@@ -222,6 +225,7 @@ export default function MyCards() {
                               {dataMobile.filter(single => single.status === CARD_STATUS_DRAFT).map((card, idx) => (
                                 <div key={idx}>
                                   <HomeCard
+                                    id={card.id}
                                     isHit={card.isHit}
                                     type={card.type}
                                     level={card.level}
@@ -242,6 +246,7 @@ export default function MyCards() {
                                     <div key={idx}>
                                       <HomeCard
 
+id={card.id}
                                         isHit={card.isHit}
                                         type={card.type}
                                         level={card.level}
@@ -268,6 +273,7 @@ export default function MyCards() {
                               {dataMobile.filter(single => single.status === CARD_STATUS_NOTACTIVE).map((card, idx) => (
                                 <div key={idx}>
                                   <HomeCard
+                                    id={card.id}
                                     isHit={card.isHit}
                                     type={card.type}
                                     level={card.level}
@@ -288,6 +294,7 @@ export default function MyCards() {
                                     <div key={idx}>
                                       <HomeCard
 
+id={card.id}
                                         isHit={card.isHit}
                                         type={card.type}
                                         level={card.level}
@@ -315,6 +322,7 @@ export default function MyCards() {
                               {dataMobile.filter(single => single.status === CARD_STATUS_ACTIVE).map((card, idx) => (
                                 <div key={idx}>
                                   <HomeCard
+                                    id={card.id}
                                     isHit={card.isHit}
                                     type={card.type}
                                     level={card.level}
@@ -336,6 +344,7 @@ export default function MyCards() {
                                     {console.log(card)}
                                       <HomeCard
 
+id={card.id}
                                         isHit={card.isHit}
                                         type={card.type}
                                         level={card.level}
@@ -364,6 +373,7 @@ export default function MyCards() {
                               {dataMobile.filter(single => single.status === CARD_STATUS_ENDED).map((card, idx) => (
                                 <div key={idx}>
                                   <HomeCard
+                                    id={card.id}
                                     isHit={card.isHit}
                                     type={card.type}
                                     level={card.level}
@@ -384,6 +394,7 @@ export default function MyCards() {
                                     <div key={idx}>
                                       <HomeCard
 
+id={card.id}
                                         isHit={card.isHit}
                                         type={card.type}
                                         level={card.level}
@@ -411,6 +422,7 @@ export default function MyCards() {
                               {dataMobile.filter(single => single.status === CARD_STATUS_ARCHIVE).map((card, idx) => (
                                 <div key={idx}>
                                   <HomeCard
+                                    id={card.id}
                                     isHit={card.isHit}
                                     type={card.type}
                                     level={card.level}
@@ -431,6 +443,7 @@ export default function MyCards() {
                                     <div key={idx}>
                                       <HomeCard
 
+id={card.id}
                                         isHit={card.isHit}
                                         type={card.type}
                                         level={card.level}

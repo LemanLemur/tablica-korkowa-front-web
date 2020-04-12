@@ -5,7 +5,7 @@ import RoomIcon from "@material-ui/icons/Room";
 import PersonIcon from "@material-ui/icons/Person";
 import GroupIcon from "@material-ui/icons/Group";
 import timeConverter from "../../functions/timeConverter";
-
+import { Link } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -35,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
     border: "0px solid grey",
     borderTop: "4px solid #3f51b5",
     boxShadow: "-1px 3px 10px 1px rgba(0,0,0,0.25)",
+    background: "#fff",
+    minWidth: "450px",
+    maxWidth: "450px"
   },
   row: {
     display: "flex",
@@ -63,14 +66,14 @@ const useStyles = makeStyles((theme) => ({
     margin: "5px",
     width: theme.spacing(12),
     height: theme.spacing(12),
-    border: "2px solid #3f51b5",
+    border: "3px solid #3f51b5",
     borderRadius: "inhereit",
     [theme.breakpoints.down("600")]: {
       width: theme.spacing(6),
       height: theme.spacing(6),
     },
   },avatarIsHit: {
-    border: "3px solid gold",
+    border: "3px solid #3f51b5",
   },
   name: {
     alignSelf: "flex-start",
@@ -110,8 +113,14 @@ const useStyles = makeStyles((theme) => ({
     color: "grey"
   },
   isHit: {
-    borderTop: "4px solid gold",
-    boxShadow: "-1px 3px 10px 1px rgb(218,165,32, 0.6)",
+    borderImage: "linear-gradient(to right, #3f51b5, #8a5195) 30 30 100%;", /* Standard syntax (must be last) */
+    borderTopWidth: "4px",
+    borderStyle: "solid",
+    backgroundColor: "#fff6cb",
+    borderBottom:"0",
+    borderLeft:"0",
+    borderRight:"0"
+    
   },
 
 }));
@@ -125,19 +134,26 @@ export default function HomeCard(props) {
   const classes = useStyles();
   
   return (
-    <div className={classes.root}>
-        {console.log(props.isHit)}
-                <div className={` ${props.isHit ? classes.isHit : ""} ${classes.paper} `}>
+   
+
+    <div className={classes.root} key ={props.id}> 
+    {console.log()}
+    <Link to = {{
+      pathname:'/cardPage',
+      ID: props.id
+    }}
+  >
+        
+                <div className={`${props.isHit ? classes.isHit : ""} ${classes.paper} `}>
 
         <div className={classes.row} >
           {//<i className="fas fa-users"></i>
           }
           <Avatar alt="avatar" src={props.avatar} className={`${classes.avatar} ${props.isHit ? classes.avatarIsHit : ""}`} />
-
           <div className={classes.col}>
             <div className={classes.row}>
               <div className={classes.name}>
-                <b>{Capitalize(props.tittle)}</b>
+                <b>{props.tittle.length >=60 ? Capitalize(props.tittle.toString().substring(0,60) + "...") : Capitalize(props.tittle)}</b>
                 <div style={{ clear: "both" }}></div>
                 <i style={{ color: "darkgrey" }}>{props.level}</i>
               </div>
@@ -171,6 +187,8 @@ export default function HomeCard(props) {
           </div>
         </div>
       </div>
+    </Link>
     </div>
+
   );
 }

@@ -12,6 +12,7 @@ import App from "./app/App";
 import Header from "./app/Header";
 import Profile from "./app/Profile";
 import SignUp from "./app/SignUp";
+import CardPage from "./app/CardPage";
 import PageNotFound from "./app/PageNotFound";
 
 const store = configureStore();
@@ -26,6 +27,7 @@ ReactDOM.render(
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/myCards" component={MyCards} />
           <Route exact path="/sign-up" component={SignUp} />
+          <Route exact path="/cardPage" component={CardPage} />
           <Route render={() => <PageNotFound/>} />
         </Switch>
       </ConnectedRouter>

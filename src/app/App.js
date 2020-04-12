@@ -75,6 +75,7 @@ function App() {
       {dataMobile.map((card, idx) => (
                             <div key={idx}>
         <HomeCard
+        id={card.id}
         isHit={card.isHit}
         type={card.type}
           level={card.level}
@@ -94,6 +95,7 @@ function App() {
           {dataDesktop1.map((card, idx) => (
                             <div key={idx}>
             <HomeCard
+        id={card.id}
             isHit={card.isHit}
             type={card.type}
             level={card.level}
@@ -110,6 +112,7 @@ function App() {
           {dataDesktop2.map((card, idx) => (
                             <div key={idx}>
             <HomeCard
+        id={card.id}
             isHit={card.isHit}
             type={card.type}
             level={card.level}
