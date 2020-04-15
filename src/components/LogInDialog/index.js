@@ -16,6 +16,7 @@ import {
   LOG_IN_ERROR,
   CLOSE_LOG_IN_MSG,
   LOG_IN_SUCCESS,
+  LOG_OUT,
 } from "../../constants/actionTypes";
 import axios from "axios";
 import {
@@ -157,7 +158,7 @@ export default function LogInDialog() {
       await firebase.googleLogin().then((res) => {
         localStorage.setItem("uid", res.user.uid);
         dispatch({ type: LOG_IN, payload: res.user });
-        console.log(res);
+        // console.log(res);
         var google = res;
         var promise1;
 
@@ -174,7 +175,17 @@ export default function LogInDialog() {
               dispatch({ type: LOG_IN_SUCCESS });
             })
             .catch(function (error) {
+              console.log(error.response.status === 404);
               if (error.response.status === 404) {
+                console.log({
+                  accountID: google.user.uid,
+                  firstname: google.additionalUserInfo.profile.given_name,
+                  lastname: google.additionalUserInfo.profile.family_name,
+                  email: google.user.email,
+                  avatar: google.user.photoURL,
+                  telephone: google.user.phoneNumber,
+                  provider: "google",
+                })
                 axios
                   .post(POST_REGISTER_USER, {
                     accountID: google.user.uid,
@@ -183,9 +194,18 @@ export default function LogInDialog() {
                     email: google.user.email,
                     avatar: google.user.photoURL,
                     telephone: google.user.phoneNumber,
+                    provider: "google",
                   })
                   .then((res) => {
                     resolve(res);
+                  }).catch(function (error) {
+                    console.log(error);
+                    dispatch({ type: LOG_IN_ERROR, payload: error });
+                    firebase.logout().then(() => {
+                      dispatch({ type: LOG_OUT });
+                      localStorage.removeItem('uid');
+                      localStorage.removeItem("user_n");
+                    });
                   });
               } else {
                 dispatch({ type: LOG_IN_ERROR, payload: error });

@@ -6,10 +6,11 @@ import {
     LOG_IN_SUCCESS,
 } from './constants/actionTypes';
 
-export const userLogIn = (user) => {
+export const userLogIn = (user, registerType) => {
     return {
         type: LOG_IN,
-        payload: user
+        payload: user,
+        provider: registerType
     };
 };
 

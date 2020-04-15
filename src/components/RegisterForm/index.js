@@ -259,7 +259,7 @@ export default function RegisterForm() {
       try {
         await firebase.register(mail, pass).then((res) => {
           var UID = res.uid;
-          dispatch({ type: LOG_IN, payload: res });
+          dispatch({ type: LOG_IN, payload: res, provider: "email" });
           localStorage.setItem("uid", UID);
           axios
             .post(POST_REGISTER_USER, {
@@ -269,6 +269,7 @@ export default function RegisterForm() {
               email: mail,
               avatar: avatar,
               telephone: tel,
+              provider: "email",
             })
             .then((res) => {
               localStorage.setItem("user_n", name);

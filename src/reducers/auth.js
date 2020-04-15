@@ -24,6 +24,7 @@ export default (state = INIT_STATE, action) => {
         ...state,
         authUser: action.payload.uid,
         mail: action.payload.email,
+        provider: action.provider,
       };
     }
     case LOG_IN_SUCCESS: {
