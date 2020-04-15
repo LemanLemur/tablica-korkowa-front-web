@@ -30,6 +30,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { returnErrorMsg } from "../../functions/returnErrorMessage";
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -175,17 +176,7 @@ export default function LogInDialog() {
               dispatch({ type: LOG_IN_SUCCESS });
             })
             .catch(function (error) {
-              console.log(error.response.status === 404);
               if (error.response.status === 404) {
-                console.log({
-                  accountID: google.user.uid,
-                  firstname: google.additionalUserInfo.profile.given_name,
-                  lastname: google.additionalUserInfo.profile.family_name,
-                  email: google.user.email,
-                  avatar: google.user.photoURL,
-                  telephone: google.user.phoneNumber,
-                  provider: "google",
-                })
                 axios
                   .post(POST_REGISTER_USER, {
                     accountID: google.user.uid,
@@ -199,7 +190,6 @@ export default function LogInDialog() {
                   .then((res) => {
                     resolve(res);
                   }).catch(function (error) {
-                    console.log(error);
                     dispatch({ type: LOG_IN_ERROR, payload: error });
                     firebase.logout().then(() => {
                       dispatch({ type: LOG_OUT });
@@ -225,6 +215,75 @@ export default function LogInDialog() {
         });
       });
     } catch (error) {
+      dispatch({ type: LOG_IN_ERROR, payload: error });
+    }
+  }
+
+  async function handleFacebookLogin() {
+    try {
+      await firebase.facebookLogin().then((res) => {
+        localStorage.setItem("uid", res.user.uid);
+        dispatch({ type: LOG_IN, payload: res.user });
+        // console.log(res);
+        var facebook = res;
+        var promise1;
+
+        promise1 = new Promise(function (resolve, reject) {
+          axios
+            .get(GET_USER_BY_AID_URL + res.user.uid)
+            .then((res) => {
+              reject();
+              localStorage.setItem("user_n", res.data[0].firstName);
+              localStorage.setItem("user_a", res.data[0].avatar);
+              localStorage.setItem("user_id", res.data[0].id);
+              dispatch({ type: LOAD_USER, payload: res.data[0] });
+              axios.put(LAST_LOG_UPDATE_URL + res.data[0].id);
+              dispatch({ type: LOG_IN_SUCCESS });
+            })
+            .catch(function (error) {
+              console.log(error);
+              if (error.response.status === 404) {
+                axios
+                  .post(POST_REGISTER_USER, {
+                    accountID: facebook.user.uid,
+                    firstname: facebook.additionalUserInfo.profile.first_name,
+                    lastname: facebook.additionalUserInfo.profile.last_name,
+                    email: facebook.additionalUserInfo.profile.email,
+                    avatar: facebook.additionalUserInfo.profile.picture.data.url,
+                    telephone: facebook.user.phoneNumber,
+                    provider: "facebook",
+                  })
+                  .then((res) => {
+                    resolve(res);
+                  }).catch(function (error) {
+                    console.log(error);
+                    dispatch({ type: LOG_IN_ERROR, payload: error });
+                    firebase.logout().then(() => {
+                      dispatch({ type: LOG_OUT });
+                      localStorage.removeItem('uid');
+                      localStorage.removeItem("user_n");
+                    });
+                  });
+              } else {
+                console.log(error);
+                dispatch({ type: LOG_IN_ERROR, payload: error });
+              }
+            });
+        });
+
+        promise1.then(function () {
+          axios.get(GET_USER_BY_AID_URL + facebook.user.uid).then((res) => {
+            localStorage.setItem("user_n", res.data[0].firstName);
+            localStorage.setItem("user_a", res.data[0].avatar);
+            localStorage.setItem("user_id", res.data[0].id);
+            dispatch({ type: LOAD_USER, payload: res.data[0] });
+            axios.put(LAST_LOG_UPDATE_URL + res.data[0].id);
+            dispatch({ type: LOG_IN_SUCCESS });
+          });
+        });
+      });
+    } catch (error) {
+      console.log(error);
       dispatch({ type: LOG_IN_ERROR, payload: error });
     }
   }
@@ -282,12 +341,19 @@ export default function LogInDialog() {
                 type="password"
                 onKeyDown={(e) => handleKeyDown(e)}
               />
+              <Typography variant="body2" color="textSecondary" style={{
+                    padding: "0px",
+                    fontSize: "20px",
+                    marginTop: "15px",
+                  }}>lub</Typography>
               <ButtonGroup>
                 <Button
                   style={{
                     padding: "0px",
                     fontSize: "20px",
-                    marginTop: "30px",
+                    marginTop: "15px",
+                    fontWeight: "bold",
+                    fontFamily: "monospace",
                     background: "RGB(202,65,47)",
                     color: "white",
                   }}
@@ -297,13 +363,40 @@ export default function LogInDialog() {
                 </Button>
                 <Button
                   style={{
-                    marginTop: "30px",
+                    marginTop: "15px",
                     background: "RGB(202,65,47)",
                     color: "white",
                   }}
                   onClick={handleGoogleLogin}
                 >
                   Zaloguj przez Google
+                </Button>
+              </ButtonGroup>
+              <ButtonGroup>
+                <Button
+                  style={{
+                    padding: "0px",
+                    textTransform: "lowercase",
+                    fontWeight: "bold",
+                    fontFamily: "monospace",
+                    fontSize: "20px",
+                    marginTop: "15px",
+                    background: "rgb(59, 86, 153)",
+                    color: "white",
+                  }}
+                  onClick={handleFacebookLogin}
+                >
+                  f
+                </Button>
+                <Button
+                  style={{
+                    marginTop: "15px",
+                    background: "rgb(59, 86, 153)",
+                    color: "white",
+                  }}
+                  onClick={handleFacebookLogin}
+                >
+                  Zaloguj przez Facebook
                 </Button>
               </ButtonGroup>
             </div>

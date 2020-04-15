@@ -21,6 +21,11 @@ const firebaseConfig = {
 
       googleLogin(){
         var provider = new app.auth.GoogleAuthProvider();
+        return app.auth.signInWithPopup(provider);
+      }
+
+      facebookLogin(){
+        var provider = new app.auth.FacebookAuthProvider();
         return app.auth().signInWithPopup(provider);
       }
 
